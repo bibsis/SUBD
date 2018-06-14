@@ -1,0 +1,57 @@
+DROP DATABASE IF EXISTS cinema;
+CREATE DATABASE cinema;  
+USE cinema;  
+ 
+-- CREATE TABLE movies(
+-- 	Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+-- 	Name VARCHAR(50) NOT NULL,
+-- 	Year INTEGER(4) NOT NULL
+-- );
+-- 
+-- CREATE TABLE tickets(
+-- 	Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+-- 	MovieName VARCHAR(50) NOT NULL,
+-- 	Price FLOAT NOT NULL,
+--     
+--     FOREIGN KEY (MovieName) REFERENCES movies(Id)
+-- );
+-- 
+-- CREATE TABLE trailers(
+-- 	Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+-- 	MovieTrailer VARCHAR(50) NOT NULL,
+-- 	Genre FLOAT NOT NULL
+-- );
+
+CREATE TABLE Positions(
+	PositionCode CHAR(2) NOT NULL,
+    Name VARCHAR(30) NOT NULL,
+    
+    PRIMARY KEY(PositionCode, Name)
+);
+
+
+CREATE TABLE Players(
+	Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	Name VARCHAR(40) NOT NULL,
+    Num INTEGER NOT NULL,
+	PositionCode CHAR(2) NOT NULL,
+    
+	FOREIGN KEY (PositionCode) REFERENCES Positions(PositionCode)
+);
+
+CREATE TABLE Tournaments(
+	Id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	Name VARCHAR(40) NOT NULL
+);
+
+SET FOREIGN_KEY_CHECKS=0;
+
+CREATE TABLE Matches(
+	Id INTEGER AUTO_INCREMENT PRIMARY KEY,
+	MatchDate DATE NOT NULL,
+	TournamentId INTEGER NOT NULL,
+    
+    FOREIGN KEY (TournamentId) REFERENCES Tournaments(Id)
+);
+
+SELECT * FROM cinema.Players;

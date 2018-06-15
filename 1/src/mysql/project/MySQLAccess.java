@@ -41,9 +41,6 @@ public class MySQLAccess {
             try (PreparedStatement stmt = connect.prepareStatement("INSERT INTO auditoriums (THEATRE_ID) VALUES (?)")) {
                  stmt.setInt(1, 1);
                 stmt.executeUpdate();
-//                resultSet = stmt
-//                        .executeQuery("SELECT * FROM movies");
-//                writeResultSet(resultSet);
             }
             // stmt is auto closed here, even if SQLException is thrown
 
@@ -57,7 +54,15 @@ public class MySQLAccess {
             try (PreparedStatement stmt = connect.prepareStatement("DELETE FROM movie_showtimes WHERE LENGTH = ?;")) {
                  stmt.setInt(1, 269);
                  stmt.executeUpdate();
+
                }
+
+//simo
+            //bibs
+
+//                resultSet = stmt
+//                        .executeQuery("SELECT * FROM movies");
+//                writeResultSet(resultSet);
 
         }
         // connection is auto closed here, even if SQLException is thrown

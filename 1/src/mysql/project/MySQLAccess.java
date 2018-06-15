@@ -57,15 +57,20 @@ public class MySQLAccess {
 
                }
 
-//simo
-            //bibs
+        try (PreparedStatement stmt = connect.prepareStatement("INSERT INTO movies (NAME, LENGTH) VALUES (?, ?)")) {
+                stmt.setString(1, "Iron Man");
+                stmt.setInt(2, 140);
+                stmt.executeUpdate();
+            }
 
-//                resultSet = stmt
-//                        .executeQuery("SELECT * FROM movies");
-//                writeResultSet(resultSet);
 
+            try (PreparedStatement stmt = connect.prepareStatement("UPDATE movies SET NAME = ?, LENGTH = ? WHERE NAME = ?")) {
+                stmt.setString(1, "Iron Man");
+                stmt.setInt(2, 140);
+                stmt.setString(3, "Adventures");
+                stmt.executeUpdate();
+            }
         }
-        // connection is auto closed here, even if SQLException is thrown
 
     }
 

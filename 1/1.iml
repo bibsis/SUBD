@@ -7,32 +7,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES />
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/build/java" />
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/demo/java" />
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/generated/java" />
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/legacy/java" />
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/main/core-api/java" />
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/main/core-impl/java" />
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/main/protocol-impl/java" />
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/main/user-api/java" />
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/main/user-impl/java" />
-          <root url="jar://$MODULE_DIR$/../../mysql-connector-java-8.0.11.zip!/mysql-connector-java-8.0.11/src/test/java" />
-        </SOURCES>
-      </library>
-    </orderEntry>
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../SUBD/Lib/mysql-connector-java-5.1.46-bin.jar!/" />
+          <root url="jar://$MODULE_DIR$/Lib/mysql-connector-java-5.1.46-bin.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="mysql-connector-java-5.1.46-bin" level="project" />
   </component>
 </module>

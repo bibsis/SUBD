@@ -16,36 +16,36 @@
         );
 
         CREATE TABLE theatres (
-            ID INTEGER,
+            ID INTEGER NOT NULL AUTO_INCREMENT,
             PHONE_NUMBER VARCHAR(11),
             PRIMARY KEY (ID)
         );
 
         CREATE TABLE auditoriums (
-            ID INTEGER,
+            ID INTEGER NOT NULL AUTO_INCREMENT,
             THEATRE_ID INTEGER,
             FOREIGN KEY (THEATRE_ID)
             REFERENCES theatres(ID)
-            ON DELETE CASCADE,
+            ON DELETE NO ACTION,
             PRIMARY KEY (ID)
         );
 
         CREATE TABLE movie_showtimes (
             ID INTEGER NOT NULL AUTO_INCREMENT,
-            START_TIME TIME,
-            END_TIME TIME,
+            START_TIME VARCHAR(8),
+            END_TIME VARCHAR(8),
             MOVIE_ID INTEGER,
             FOREIGN KEY (MOVIE_ID)
             REFERENCES movies(ID)
-            ON DELETE CASCADE,
+            ON DELETE NO ACTION,
             AUDITORIUM_ID INTEGER,
             FOREIGN KEY (AUDITORIUM_ID)
             REFERENCES auditoriums(ID)
-            ON DELETE CASCADE,
+            ON DELETE NO ACTION,
             THEATRE_ID INTEGER,
             FOREIGN KEY (THEATRE_ID)
             REFERENCES theatres(ID)
-            ON DELETE CASCADE,
+            ON DELETE NO ACTION,
             PRIMARY KEY (ID)
         );
 

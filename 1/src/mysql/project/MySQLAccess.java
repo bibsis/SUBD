@@ -17,97 +17,42 @@ public class MySQLAccess {
     public void readDataBase() throws Exception {
 
 //
-//        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "password")) {
-//
-//            try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO PUBLISHER (CODE, PUBLISHER_NAME) VALUES (?, ?)")) {
-//                stmt.setString(1, book.getPublisher().getCode());
-//                stmt.setString(2, book.getPublisher().getName());
-//                stmt.executeUpdate();
-//            }
-//            // stmt is auto closed here, even if SQLException is thrown
-//
-//            try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO BOOK (ISBN, BOOK_NAME, PUBLISHER_CODE) VALUES (?, ?, ?)")) {
-//                 stmt.setString(1, book.getIsbn());
-//                 stmt.setString(2, book.getName());
-//                 stmt.setString(3, book.getPublisher().getCode());
-//                 stmt.executeUpdate();
-//            }
-//            // stmt is auto closed here, even if SQLException is thrown
-//        }
-//        // connection is auto closed here, even if SQLException is thrown
-
-//
         // This will load the MySQL driver, each DB has its own driver
         Class.forName("com.mysql.cj.jdbc.Driver");
+//        PreparedStatement stmt = null;
 
         // Setup the connection with the DB
-        try (Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback?verifyServerCertificate=false&useSSL=true&user=sqluser&password=sqluserpw&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC")){
+        try (Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/project?verifyServerCertificate=false&useSSL=true&user=sqluser&password=sqluserpw&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC")){
 
-            try (PreparedStatement stmt = connect.prepareStatement("INSERT INTO PUBLISHER (CODE, PUBLISHER_NAME) VALUES (?, ?)")) {
-                stmt.setString(1, book.getPublisher().getCode());
-                stmt.setString(2, book.getPublisher().getName());
+            try (PreparedStatement stmt = connect.prepareStatement("INSERT INTO movies (NAME, LENGTH) VALUES (?, ?)")) {
+                stmt.setString(1, "Titanic");
+                stmt.setInt(2, 269);
                 stmt.executeUpdate();
             }
+
             // stmt is auto closed here, even if SQLException is thrown
 
-            try (PreparedStatement stmt = connect.prepareStatement("INSERT INTO BOOK (ISBN, BOOK_NAME, PUBLISHER_CODE) VALUES (?, ?, ?)")) {
-                 stmt.setString(1, book.getIsbn());
-                 stmt.setString(2, book.getName());
-                 stmt.setString(3, book.getPublisher().getCode());
+            try (PreparedStatement stmt = connect.prepareStatement("INSERT INTO theatres (PHONE_NUMBER) VALUES (?)")) {
+                 stmt.setString(1, "08773623333");
                  stmt.executeUpdate();
             }
             // stmt is auto closed here, even if SQLException is thrown
 
-            // Statements allow to issue SQL queries to the database
-            statement = connect.createStatement();
-            // Result set get the result of the SQL query in the beginning
-//            resultSet = statement
-//                    .executeQuery("SELECT * FROM feedback.comments");
-//            writeResultSet(resultSet);
+            try (PreparedStatement stmt = connect.prepareStatement("INSERT INTO auditoriums (THEATRE_ID) VALUES (?)")) {
+                 stmt.setInt(1, 1);
+                stmt.executeUpdate();
+//                resultSet = stmt
+//                        .executeQuery("SELECT * FROM movies");
+//                writeResultSet(resultSet);
+            }
+            // stmt is auto closed here, even if SQLException is thrown
 
-            // PreparedStatements can use variables and are more efficient
-            preparedStatement = connect
-                    .prepareStatement("INSERT INTO feedback.comments VALUES (default, ?, ?, ?, ? , ?, ?)");
-            // "myuser, webpage, datum, summary, COMMENTS FROM feedback.comments");
-            // Parameters start with 1
-            preparedStatement.setString(1, "Test");
-            preparedStatement.setString(2, "TestEmail");
-            preparedStatement.setString(3, "TestWebpage");
-            preparedStatement.setDate(4, new java.sql.Date(2009, 12, 11));
-            preparedStatement.setString(5, "TestSummary");
-            preparedStatement.setString(6, "TestComment");
-            preparedStatement.executeUpdate();
-
-            preparedStatement = connect
-                    .prepareStatement("SELECT myuser, webpage, datum, summary, COMMENTS FROM feedback.comments");
-            resultSet = preparedStatement.executeQuery();
-            writeResultSet(resultSet);
-
-            // Remove again the insert comment
-            preparedStatement = connect
-                    .prepareStatement("DELETE FROM feedback.comments WHERE myuser= ? ; ");
-            preparedStatement.setString(1, "Test");
-            preparedStatement.executeUpdate();
-
-            resultSet = statement
-                    .executeQuery("SELECT * FROM feedback.comments");
-            writeMetaData(resultSet);
+            //bibi
+            //simo
 
         }
         // connection is auto closed here, even if SQLException is thrown
 
-    }
-
-    private void writeMetaData(ResultSet resultSet) throws SQLException {
-        //  Now get some metadata FROM the database
-        // Result set get the result of the SQL query
-
-        System.out.println("The columns in the table are: ");
-
-        System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
-        for  (int i = 1; i<= resultSet.getMetaData().getColumnCount(); i++){
-            System.out.println("Column " + i  + " "+ resultSet.getMetaData().getColumnName(i));
-        }
     }
 
     private void writeResultSet(ResultSet resultSet) throws SQLException {
@@ -117,36 +62,12 @@ public class MySQLAccess {
             // also possible to get the columns via the column number
             // which starts at 1
             // e.g. resultSet.getSTring(2);
-            String user = resultSet.getString("myuser");
-            String website = resultSet.getString("webpage");
-            String summary = resultSet.getString("summary");
-            Date date = resultSet.getDate("datum");
-            String comment = resultSet.getString("comments");
-            System.out.println("User: " + user);
-            System.out.println("Website: " + website);
-            System.out.println("summary: " + summary);
-            System.out.println("Date: " + date);
-            System.out.println("Comment: " + comment);
+            String name = resultSet.getString("NAME");
+            Integer length = resultSet.getInt("LENGTH");
+            System.out.println("Name: " + name);
+            System.out.println("Length: " + length);
         }
     }
 
-    // You need to close the resultSet
-    private void close() {
-//        try {
-//            if (resultSet != null) {
-//                resultSet.close();
-//            }
-//
-//            if (statement != null) {
-//                statement.close();
-//            }
-//
-//            if (connect != null) {
-//                connect.close();
-//            }
-//        } catch (Exception e) {
-//
-//        }
-    }
 
 }

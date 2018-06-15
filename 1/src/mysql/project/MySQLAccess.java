@@ -47,7 +47,13 @@ public class MySQLAccess {
             }
             // stmt is auto closed here, even if SQLException is thrown
 
-            //bibi
+            try (PreparedStatement stmt = connect.prepareStatement("INSERT INTO movie_showtimes (START_TIME, MOVIE_ID, AUDITORIUM_ID, THEATRE_ID) VALUES (?,?,?,?)")) {
+                 stmt.setString(1, "17:55");
+                 stmt.setInt(2, 1);
+                 stmt.setInt(3, 1);
+                 stmt.setInt(4, 1);
+                 stmt.executeUpdate();
+            }
             //simo
 
         }

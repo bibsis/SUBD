@@ -54,7 +54,10 @@ public class MySQLAccess {
                  stmt.setInt(4, 1);
                  stmt.executeUpdate();
             }
-            //simo
+            try (PreparedStatement stmt = connect.prepareStatement("DELETE FROM movie_showtimes WHERE LENGTH = ?;")) {
+                 stmt.setInt(1, 269);
+                 stmt.executeUpdate();
+               }
 
         }
         // connection is auto closed here, even if SQLException is thrown

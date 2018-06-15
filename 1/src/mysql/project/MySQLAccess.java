@@ -62,12 +62,23 @@ public class MySQLAccess {
                 stmt.setInt(2, 140);
                 stmt.executeUpdate();
             }
+            
+        try (PreparedStatement stmt = connect.prepareStatement("INSERT INTO movies (NAME, LENGTH) VALUES (?, ?)")) {
+                stmt.setString(1, "Fight Club");
+                stmt.setInt(2, 120);
+                stmt.executeUpdate();
+            }
 
 
             try (PreparedStatement stmt = connect.prepareStatement("UPDATE movies SET NAME = ?, LENGTH = ? WHERE NAME = ?")) {
-                stmt.setString(1, "Iron Man");
-                stmt.setInt(2, 140);
-                stmt.setString(3, "Adventures");
+                stmt.setString(1, "Adventures");
+                stmt.setInt(2, 160);
+                stmt.setString(3, "Iron Man");
+                stmt.executeUpdate();
+            }
+            try (PreparedStatement stmt = connect.prepareStatement("UPDATE movies SET NAME = ? WHERE NAME = ?")) {
+                stmt.setString(1, "Fight Club 2");
+                stmt.setString(3, "Fight Club");
                 stmt.executeUpdate();
             }
         }

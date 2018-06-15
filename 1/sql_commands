@@ -1,0 +1,52 @@
+--      We create db and one user then we grant usege on current used db
+
+        CREATE DATABASE project;
+        USE project;
+
+        CREATE USER janedoe IDENTIFIED BY 'janedoe';
+
+        grant usage on *.* to janedoe@localhost identified by 'janedoe';
+        grant all privileges on project.* to sqluser@localhost;
+
+        CREATE TABLE movies (
+            ID INTEGER NOT NULL AUTO_INCREMENT,
+            NAME VARCHAR(30) NOT NULL,
+            LENGTH INTEGER NOT NULL,
+            PRIMARY KEY (ID)
+        );
+
+        CREATE TABLE theatres (
+            ID INTEGER,
+            PHONE_NUMBER VARCHAR(11),
+            PRIMARY KEY (ID)
+        );
+
+        CREATE TABLE auditoriums (
+            ID INTEGER,
+            THEATRE_ID INTEGER,
+            FOREIGN KEY (THEATRE_ID)
+            REFERENCES theatres(ID)
+            ON DELETE CASCADE,
+            PRIMARY KEY (ID)
+        );
+
+        CREATE TABLE movie_showtimes (
+            ID INTEGER NOT NULL AUTO_INCREMENT,
+            START_TIME TIME,
+            END_TIME TIME,
+            MOVIE_ID INTEGER,
+            FOREIGN KEY (MOVIE_ID)
+            REFERENCES movies(ID)
+            ON DELETE CASCADE,
+            AUDITORIUM_ID INTEGER,
+            FOREIGN KEY (AUDITORIUM_ID)
+            REFERENCES auditoriums(ID)
+            ON DELETE CASCADE,
+            THEATRE_ID INTEGER,
+            FOREIGN KEY (THEATRE_ID)
+            REFERENCES theatres(ID)
+            ON DELETE CASCADE,
+            PRIMARY KEY (ID)
+        );
+
+

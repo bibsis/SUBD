@@ -132,6 +132,7 @@ public class MySQLAccess {
             }
         }
     }
+
     public void readUserInput(Connection connect) throws Exception {
 
 
@@ -183,7 +184,6 @@ public class MySQLAccess {
         } while (true);
 
     }
-
 
     public void readDataBase() throws Exception {
 
@@ -352,6 +352,7 @@ public class MySQLAccess {
         System.out.println("---------------------------------------");
         System.out.println("");
     }
+
     private void writeResultSetTheatresIDS(ResultSet resultSet) throws SQLException {
         System.out.println("");
         System.out.println("-----------------THEATRES-----------------");

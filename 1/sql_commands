@@ -17,6 +17,7 @@
 
         CREATE TABLE theatres (
             ID INTEGER NOT NULL AUTO_INCREMENT,
+            NAME VARCHAR(30) NOT NULL,
             PHONE_NUMBER VARCHAR(11),
             PRIMARY KEY (ID)
         );
@@ -27,7 +28,7 @@
             THEATRE_ID INTEGER,
             FOREIGN KEY (THEATRE_ID)
             REFERENCES theatres(ID)
-            ON DELETE NO ACTION
+            ON DELETE CASCADE
             ON UPDATE CASCADE ,
             PRIMARY KEY (ID)
         );
@@ -39,14 +40,72 @@
             MOVIE_ID INTEGER,
             FOREIGN KEY (MOVIE_ID)
             REFERENCES movies(ID)
-            ON DELETE NO ACTION
-            ON UPDATE CASCADE ,
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
             AUDITORIUM_ID INTEGER,
             FOREIGN KEY (AUDITORIUM_ID)
             REFERENCES auditoriums(ID)
-            ON DELETE NO ACTION
-            ON UPDATE CASCADE ,
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
             PRIMARY KEY (ID)
         );
+
+        CREATE TABLE tickets (
+            ID INTEGER NOT NULL AUTO_INCREMENT,
+            SEAT_NUMBER VARCHAR(30) NOT NULL,
+            CCI VARCHAR(30) NOT NULL,
+            FOREIGN KEY (MOVIE_SHOWTIMES_ID)
+            REFERENCES movie_showtimes(ID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+            FOREIGN KEY (AUDITORIUM_ID)
+            REFERENCES auditoriums(ID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+            PRIMARY KEY (ID)
+        );
+
+        CREATE TABLE clients (
+            ID INTEGER NOT NULL AUTO_INCREMENT,
+            NAME VARCHAR(30) NOT NULL,
+
+
+            FOREIGN KEY (PREFERRED_SHOPS_CLIENT_ID)
+            REFERENCES preferred_shops_client(ID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+
+
+            RESERVATION_NUMBER VARCHAR(30),
+            FOREIGN KEY (TICKETS_ID)
+            REFERENCES tickets(ID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+            PRIMARY KEY (ID)
+        );
+
+        CREATE TABLE preferred_shops_client (
+            ID INTEGER NOT NULL AUTO_INCREMENT,
+
+            FOREIGN KEY (CLIENTS_ID)
+            REFERENCES client(ID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE,
+
+            FOREIGN KEY (SHOPS_ID)
+            REFERENCES shops(ID)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+
+            PRIMARY KEY (ID)
+        );
+
+        CREATE TABLE clients (
+            ID INTEGER NOT NULL AUTO_INCREMENT,
+            NAME VARCHAR(30) NOT NULL,
+            PRIMARY KEY (ID)
+        );
+
+
 
 

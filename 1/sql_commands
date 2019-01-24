@@ -52,8 +52,7 @@
 
         CREATE TABLE tickets (
             ID INTEGER NOT NULL AUTO_INCREMENT,
-            SEAT_NUMBER VARCHAR(30) NOT NULL,
-            CCI VARCHAR(30) NOT NULL,
+            SEAT_NUMBER INTEGER NOT NULL,
             FOREIGN KEY (MOVIE_SHOWTIMES_ID)
             REFERENCES movie_showtimes(ID)
             ON DELETE CASCADE
@@ -68,11 +67,13 @@
         CREATE TABLE clients (
             ID INTEGER NOT NULL AUTO_INCREMENT,
             NAME VARCHAR(30) NOT NULL,
+            CCI VARCHAR(30) NOT NULL,
 
 
             FOREIGN KEY (PREFERRED_SHOPS_CLIENT_ID)
             REFERENCES preferred_shops_client(ID)
-            ON DELETE CASCADE
+            ON DELETE NO ACTION
+
             ON UPDATE CASCADE,
 
 
